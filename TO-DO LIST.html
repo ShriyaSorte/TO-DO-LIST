@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List with Drag and Drop</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <style>
+        #task-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .task {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+
+        .task:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>To-Do List</h2>
+    <input type="text" id="task-input" placeholder="Add a task">
+    <button onclick="addTask()">Add Task</button>
+    <ul id="task-list"></ul>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#task-list").sortable();
+        });
+
+        function addTask() {
+            var taskText = $("#task-input").val().trim();
+            if (taskText !== "") {
+                var newTask = $("<li class='task'>" + taskText + "<i class='fas fa-trash-alt' onclick='deleteTask(this)'></i></li>");
+                $("#task-list").append(newTask);
+                $("#task-input").val("");
+            }
+        }
+
+        function deleteTask(element) {
+            $(element).parent().remove();
+        }
+    </script>
+</body>
+
+</html>
